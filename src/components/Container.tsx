@@ -6,9 +6,11 @@ interface Container {
 
 export default function Container({ children }: Container) {
   return (
-    <div className="flex flex-row w-full h-screen bg-slate-50">
-      <Sidebar />
-      <div className="flex flex-col w-full">{children}</div>
+    <div className="flex h-[100vh] bg-white">
+      <div className="w-[250px] h-full sticky top-0">
+        <Sidebar />
+      </div>
+      <div className="flex-grow overflow-auto">{children}</div>
     </div>
   );
 }

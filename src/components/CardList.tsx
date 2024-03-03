@@ -1,61 +1,77 @@
-import { MdFoodBank } from "react-icons/md";
+import {
+  MdFoodBank,
+  MdMiscellaneousServices,
+  MdArrowCircleDown,
+  MdArrowCircleUp,
+} from "react-icons/md";
 
 export default function CardList() {
   return (
     <>
-      <div className="flex flex-wrap flex-row justify-center my-16">
-        <div className="text-2xl w-60 mr-8 shadow drop-shadow-sm rounded-lg bg-white">
+      <h1 className="text-2xl ml-8 mt-8 font-bold text-slate-700 font-poppins">
+        Overview
+      </h1>
+      <div className="flex flex-wrap flex-row justify-center my-6">
+        <div className="text-2xl w-60 mr-8 shadow drop-shadow-sm rounded-lg bg-white hover:transform hover:transition-transform hover:scale-110 hover:duration-200">
           <div className="flex justify-between">
-            <p className="text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
+            <p className="font-poppins text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
               Jumlah Barang
             </p>
-            <MdFoodBank className="text-[50px] text-white m-4 bg-sky-500 p-2 rounded-lg" />
+            <MdMiscellaneousServices className="text-[50px] text-white m-4 bg-red-500 p-2 rounded-lg" />
           </div>
           <div className="mx-4 -mt-8 mb-7">
-            <p className="text-4xl font-semibold">100</p>
-            <p className="text-sm font-semibold text-slate-500 mt-2">
+            <p className="text-4xl font-semibold font-poppins text-slate-800">
+              100
+            </p>
+            <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
               Maret 2024
             </p>
           </div>
         </div>
-        <div className="text-2xl w-60 shadow drop-shadow-sm rounded-lg bg-white">
+        <div className="text-2xl w-60 shadow drop-shadow-sm rounded-lg bg-white hover:transform hover:transition-transform hover:scale-110 hover:duration-200">
           <div className="flex justify-between">
-            <p className="text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
+            <p className="font-poppins text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
               Jumlah Bahan
             </p>
             <MdFoodBank className="text-[50px] text-white m-4 bg-sky-500 p-2 rounded-lg" />
           </div>
           <div className="mx-4 -mt-8 mb-7">
-            <p className="text-4xl font-semibold">100</p>
-            <p className="text-sm font-semibold text-slate-500 mt-2">
+            <p className="font-poppins text-4xl font-semibold text-slate-800">
+              100
+            </p>
+            <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
               Maret 2024
             </p>
           </div>
         </div>
-        <div className="text-2xl ml-8 w-60 shadow drop-shadow-sm rounded-lg bg-white">
+        <div className="text-2xl ml-8 w-60 shadow drop-shadow-sm rounded-lg bg-white hover:transform hover:transition-transform hover:scale-110 hover:duration-200">
           <div className="flex justify-between">
-            <p className="text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
+            <p className="font-poppins text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
               Bahan Masuk
             </p>
-            <MdFoodBank className="text-[50px] text-white m-4 bg-sky-500 p-2 rounded-lg" />
+            <MdArrowCircleDown className="text-[50px] text-white m-4 bg-green-500 p-2 rounded-lg" />
           </div>
           <div className="mx-4 -mt-8 mb-7">
-            <p className="text-4xl font-semibold">100</p>
-            <p className="text-sm font-semibold text-slate-500 mt-2">
+            <p className="text-4xl font-semibold font-poppins text-slate-800">
+              100
+            </p>
+            <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
               Maret 2024
             </p>
           </div>
         </div>
-        <div className="text-2xl ml-8 w-60 shadow drop-shadow-sm rounded-lg bg-white">
+        <div className="text-2xl ml-8 w-60 shadow drop-shadow-sm rounded-lg bg-white hover:transform hover:transition-transform hover:scale-110 hover:duration-200">
           <div className="flex justify-between">
-            <p className="text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
+            <p className="font-poppins text-slate-500 text-sm my-9 mx-4 font-bold uppercase">
               Bahan Keluar
             </p>
-            <MdFoodBank className="text-[50px] text-white m-4 bg-sky-500 p-2 rounded-lg" />
+            <MdArrowCircleUp className="text-[50px] text-white m-4 bg-yellow-500 p-2 rounded-lg" />
           </div>
           <div className="mx-4 -mt-8 mb-7">
-            <p className="text-4xl font-semibold">100</p>
-            <p className="text-sm font-semibold text-slate-500 mt-2">
+            <p className="font-poppins text-4xl text-slate-800 font-semibold">
+              100
+            </p>
+            <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
               Maret 2024
             </p>
           </div>
