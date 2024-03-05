@@ -6,7 +6,7 @@ interface Container {
 
 export default function Container({ children }: Container) {
   return (
-    <div className="flex h-[100vh] bg-white">
+    <div className="flex h-[100vh] bg-slate-50">
       <div className="w-[250px] h-full sticky top-0">
         <Sidebar />
       </div>
