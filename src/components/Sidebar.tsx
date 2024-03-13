@@ -25,7 +25,7 @@ export default function Sidebar() {
           <li className="">
             <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4">
               <MdHome className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white ">
+              <a href="#" className="text-white font-semibold">
                 Dashboard
               </a>
             </div>
@@ -33,7 +33,7 @@ export default function Sidebar() {
           <li>
             <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4">
               <MdMedicalInformation className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white ">
+              <a href="#" className="text-white font-semibold">
                 Master Barang
               </a>
             </div>
@@ -41,7 +41,7 @@ export default function Sidebar() {
           <li>
             <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4">
               <MdFastfood className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white ">
+              <a href="#" className="text-white font-semibold">
                 Master Bahan
               </a>
             </div>
@@ -49,7 +49,7 @@ export default function Sidebar() {
           <li>
             <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4">
               <MdAssignment className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white ">
+              <a href="#" className="text-white font-semibold">
                 Laporan
               </a>
             </div>
@@ -57,7 +57,7 @@ export default function Sidebar() {
           <li>
             <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4">
               <MdExitToApp className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white ">
+              <a href="#" className="text-white font-semibold">
                 Logout
               </a>
             </div>

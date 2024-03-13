@@ -1,9 +1,16 @@
-import Dashboard from "./pages/Dashboard";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import routes from "./router";
 
 export default function App() {
   return (
     <>
-      <Dashboard />
+      <BrowserRouter>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
