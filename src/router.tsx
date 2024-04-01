@@ -1,15 +1,15 @@
-import AddBarangKeluar from "./pages/AddBarangKeluar";
-import AddBarangMasuk from "./pages/AddBarangMasuk";
-import AddMasterBarang from "./pages/AddMasterBarang";
-import BahanKeluar from "./pages/BahanKeluar";
-import BahanMasuk from "./pages/BahanMasuk";
-import BarangKeluar from "./pages/BarangKeluar";
-import BarangMasuk from "./pages/BarangMasuk";
+import AddBarangKeluar from "./pages/barang/AddBarangKeluar";
+import AddBarangMasuk from "./pages/barang/AddBarangMasuk";
+import AddMasterBarang from "./pages/barang/AddMasterBarang";
+import BahanKeluar from "./pages/bahan/BahanKeluar";
+import BahanMasuk from "./pages/bahan/BahanMasuk";
+import BarangKeluar from "./pages/barang/BarangKeluar";
+import BarangMasuk from "./pages/barang/BarangMasuk";
 import Dashboard from "./pages/Dashboard";
-import Laporan from "./pages/Laporan";
+import Laporan from "./pages/laporan/Laporan";
 import Login from "./pages/Login";
-import MasterBahan from "./pages/MasterBahan";
-import MasterBarang from "./pages/MasterBarang";
+import MasterBahan from "./pages/bahan/MasterBahan";
+import MasterBarang from "./pages/barang/MasterBarang";
 
 const routes = [
   {

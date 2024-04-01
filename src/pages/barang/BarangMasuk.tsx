@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../components/Header";
-import Container from "../components/Container";
-import BackNavigation from "../components/BackNavigation";
-import TopTable from "../components/TopTable";
-import TabelBarangMasuk from "../components/table/TabelBarangMasuk";
-import Pagination from "../components/Pagination";
+import Header from "../../components/Header";
+import Container from "../../components/Container";
+import BackNavigation from "../../components/BackNavigation";
+import TopTable from "../../components/TopTable";
+import TabelBarangMasuk from "../../components/table/TabelBarangMasuk";
+import Pagination from "../../components/Pagination";
 
 export default function BarangMasuk() {
   const [isLoading, setIsLoading] = React.useState(false);

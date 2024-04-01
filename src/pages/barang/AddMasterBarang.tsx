@@ -1,17 +1,15 @@
 import React from "react";
-import BackNavigation from "../components/BackNavigation";
-import Container from "../components/Container";
-import Header from "../components/Header";
-import FormBarangKeluar from "../components/form/FormBarangKeluar";
+import Container from "../../components/Container";
+import Header from "../../components/Header";
+import FormMasterBarang from "../../components/form/FormMasterBarang";
+import BackNavigation from "../../components/BackNavigation";
 
-export default function AddBarangKeluar() {
+export default function AddMasterBarang() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [namaBarang, setNamaBarang] = React.useState("");
   const [jumlahBarang, setJumlahBarang] = React.useState<number>(0);
   const [keterangan, setKeterangan] = React.useState("");
-  const [tanggal, setTanggal] = React.useState(
-    new Date().toLocaleDateString("en-CA")
-  );
+  const [satuan, setSatuan] = React.useState("Pcs");
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -23,8 +21,8 @@ export default function AddBarangKeluar() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Data yang akan dikirim: ", {
-      tanggal,
       namaBarang,
+      satuan,
       jumlahBarang,
       keterangan,
     });
@@ -32,18 +30,18 @@ export default function AddBarangKeluar() {
   return (
     <>
       <Container isLoading={isLoading}>
-        <Header title="Tambah Barang Keluar" />
-        <BackNavigation LinkKembali="/master-barang/barang-keluar" />
-        <FormBarangKeluar
-          tanggal={tanggal}
-          setTanggal={setTanggal}
+        <Header title="Tambah Barang" />
+        <BackNavigation LinkKembali="/master-barang" />
+        <FormMasterBarang
+          satuan={satuan}
+          setSatuan={setSatuan}
+          onSubmit={handleSubmit}
           namaBarang={namaBarang}
           setNamaBarang={setNamaBarang}
           jumlahBarang={jumlahBarang}
           setJumlahBarang={setJumlahBarang}
           keterangan={keterangan}
           setKeterangan={setKeterangan}
-          onSubmit={handleSubmit}
         />
       </Container>
     </>

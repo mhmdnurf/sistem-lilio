@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../components/Header";
-import Container from "../components/Container";
-import BackNavigation from "../components/BackNavigation";
-import TopTable from "../components/TopTable";
-import TabelBarangKeluar from "../components/table/TabelBarangKeluar";
-import Pagination from "../components/Pagination";
+import Header from "../../components/Header";
+import Container from "../../components/Container";
+import BackNavigation from "../../components/BackNavigation";
+import TopTable from "../../components/TopTable";
+import TabelBarangKeluar from "../../components/table/TabelBarangKeluar";
+import Pagination from "../../components/Pagination";
 
 export default function BarangKeluar() {
   const [isLoading, setIsLoading] = React.useState(false);

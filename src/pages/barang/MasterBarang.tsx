@@ -1,10 +1,10 @@
 import React from "react";
-import Container from "../components/Container";
-import Header from "../components/Header";
-import TabelMasterBarang from "../components/table/TabelMasterBarang";
-import Pagination from "../components/Pagination";
-import TopTable from "../components/TopTable";
-import MasterNavigation from "./MasterNavigation";
+import Container from "../../components/Container";
+import Header from "../../components/Header";
+import TabelMasterBarang from "../../components/table/TabelMasterBarang";
+import Pagination from "../../components/Pagination";
+import TopTable from "../../components/TopTable";
+import MasterNavigation from "../../components/MasterNavigation";
 
 export default function MasterBarang() {
   const [isLoading, setIsLoading] = React.useState(false);
