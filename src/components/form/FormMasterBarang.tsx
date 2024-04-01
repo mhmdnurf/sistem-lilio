@@ -1,31 +1,31 @@
 interface FormMasterBarang {
   namaBarang: string;
   setNamaBarang: (value: string) => void;
-  harga: string;
-  setHarga: (value: number) => void;
-  stok: string;
-  setStok: (value: number) => void;
+  jumlahBarang: number;
+  setJumlahBarang: (value: number) => void;
   keterangan: string;
   setKeterangan: (value: string) => void;
-  onsubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  satuan: string;
+  setSatuan: (value: string) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export default function FormMasterBarang({
   namaBarang,
   setNamaBarang,
-  harga,
-  setHarga,
-  stok,
-  setStok,
+  jumlahBarang,
+  setJumlahBarang,
   keterangan,
   setKeterangan,
-  onsubmit,
+  satuan,
+  setSatuan,
+  onSubmit,
 }: FormMasterBarang) {
   return (
     <>
       <form
         className="m-8 bg-white p-8 rounded-xl shadow drop-shadow-sm border-4"
-        onSubmit={onsubmit}
+        onSubmit={onSubmit}
       >
         <div className="mb-2">
           <label
@@ -40,36 +40,23 @@ export default function FormMasterBarang({
             id="namaBarang"
             value={namaBarang}
             onChange={(e) => setNamaBarang(e.target.value)}
+            placeholder="Masukkan Nama Barang"
           />
         </div>
         <div className="mb-2">
           <label
-            htmlFor="harga"
+            htmlFor="jumlahBarang"
             className="text-xl text-slate-700 font-semibold"
           >
-            Harga
+            Stok (Jumlah Awal)
           </label>
           <input
             type="number"
             className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
-            id="harga"
-            value={harga}
-            onChange={(e) => setHarga(Number(e.target.value))}
-          />
-        </div>
-        <div className="mb-2">
-          <label
-            htmlFor="stok"
-            className="text-xl text-slate-700 font-semibold"
-          >
-            Stok
-          </label>
-          <input
-            type="number"
-            className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
-            id="stok"
-            value={stok}
-            onChange={(e) => setStok(Number(e.target.value))}
+            id="jumlahBarang"
+            value={jumlahBarang}
+            onChange={(e) => setJumlahBarang(Number(e.target.value))}
+            placeholder="Masukkan Stok Awal"
           />
         </div>
         <div className="mb-2">
@@ -77,7 +64,29 @@ export default function FormMasterBarang({
             htmlFor="keterangan"
             className="text-xl text-slate-700 font-semibold"
           >
-            Keterangan
+            Satuan
+          </label>
+          <select
+            className=" w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all bg-white"
+            id="satuan"
+            value={satuan}
+            onChange={(e) => setSatuan(e.target.value)}
+          >
+            <option value="Pcs">Pcs</option>
+            <option value="Kg">Kg</option>
+            <option value="Gram">Gram</option>
+            <option value="Liter">Liter</option>
+            <option value="Dus">Dus</option>
+            <option value="Pack">Pack</option>
+            <option value="Lusin">Lusin</option>
+          </select>
+        </div>
+        <div className="mb-2">
+          <label
+            htmlFor="keterangan"
+            className="text-xl text-slate-700 font-semibold"
+          >
+            Keterangan (Opsional)
           </label>
           <input
             type="text"
@@ -85,6 +94,7 @@ export default function FormMasterBarang({
             id="keterangan"
             value={keterangan}
             onChange={(e) => setKeterangan(e.target.value)}
+            placeholder="Masukkan Keterangan Barang"
           />
         </div>
         <button

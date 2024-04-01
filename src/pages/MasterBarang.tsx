@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../components/Container";
 import Header from "../components/Header";
-import TabelMasterBarang from "../components/TabelMasterBarang";
+import TabelMasterBarang from "../components/table/TabelMasterBarang";
 import Pagination from "../components/Pagination";
 import TopTable from "../components/TopTable";
 import MasterNavigation from "./MasterNavigation";
@@ -141,6 +141,8 @@ export default function MasterBarang() {
           LinkKeluar="/master-barang/barang-keluar"
         />
         <TopTable
+          LinkTambah="/master-barang/tambah"
+          title="Barang"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />

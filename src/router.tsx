@@ -1,3 +1,4 @@
+import AddBarangMasuk from "./pages/AddBarangMasuk";
 import AddMasterBarang from "./pages/AddMasterBarang";
 import BahanKeluar from "./pages/BahanKeluar";
 import BahanMasuk from "./pages/BahanMasuk";
@@ -31,6 +32,10 @@ const routes = [
     element: <BarangMasuk />,
   },
   {
+    path: "/master-barang/barang-masuk/tambah",
+    element: <AddBarangMasuk />,
+  },
+  {
     path: "/master-barang/barang-keluar",
     element: <BarangKeluar />,
   },
@@ -42,6 +47,7 @@ const routes = [
     path: "/master-bahan/bahan-masuk",
     element: <BahanMasuk />,
   },
+
   {
     path: "/master-bahan/bahan-keluar",
     element: <BahanKeluar />,
