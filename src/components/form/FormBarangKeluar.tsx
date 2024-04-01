@@ -1,6 +1,6 @@
 import Select from "react-select";
 
-interface FormBarangMasuk {
+interface FormBarangKeluar {
   namaBarang: string;
   setNamaBarang: (value: string) => void;
   jumlahBarang: number;
@@ -8,9 +8,13 @@ interface FormBarangMasuk {
   keterangan: string;
   setKeterangan: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  tanggal: string;
+  setTanggal: (value: string) => void;
 }
 
-export default function FormBarangMasuk({
+export default function FormBarangKeluar({
+  tanggal,
+  setTanggal,
   namaBarang,
   setNamaBarang,
   jumlahBarang,
@@ -18,7 +22,7 @@ export default function FormBarangMasuk({
   keterangan,
   setKeterangan,
   onSubmit,
-}: FormBarangMasuk) {
+}: FormBarangKeluar) {
   const options = [
     { value: "Beras", label: "Beras" },
     { value: "Gula", label: "Gula" },
@@ -32,6 +36,21 @@ export default function FormBarangMasuk({
         className="m-8 bg-white p-8 rounded-xl shadow drop-shadow-sm border-4"
         onSubmit={onSubmit}
       >
+        <div className="mb-2">
+          <label
+            htmlFor="stok"
+            className="text-xl text-slate-700 font-semibold"
+          >
+            Tanggal Keluar Barang
+          </label>
+          <input
+            type="date"
+            className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
+            id="tanggal"
+            value={tanggal}
+            onChange={(e) => setTanggal(e.target.value)}
+          />
+        </div>
         <div className="mb-2">
           <label
             htmlFor="Nama Barang"
@@ -91,7 +110,6 @@ export default function FormBarangMasuk({
             id="jumlahBarang"
             value={jumlahBarang}
             onChange={(e) => setJumlahBarang(Number(e.target.value))}
-            placeholder="Jumlah Barang Keluar"
           />
         </div>
         <div className="mb-2">
@@ -107,7 +125,7 @@ export default function FormBarangMasuk({
             id="keterangan"
             value={keterangan}
             onChange={(e) => setKeterangan(e.target.value)}
-            placeholder="Keterangan Barang Masuk"
+            placeholder="Keterangan Barang Keluar"
           />
         </div>
         <button

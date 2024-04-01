@@ -2,9 +2,9 @@ import React from "react";
 import BackNavigation from "../components/BackNavigation";
 import Container from "../components/Container";
 import Header from "../components/Header";
-import FormBarangMasuk from "../components/form/FormBarangMasuk";
+import FormBarangKeluar from "../components/form/FormBarangKeluar";
 
-export default function AddBarangMasuk() {
+export default function AddBarangKeluar() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [namaBarang, setNamaBarang] = React.useState("");
   const [jumlahBarang, setJumlahBarang] = React.useState<number>(0);
@@ -32,9 +32,9 @@ export default function AddBarangMasuk() {
   return (
     <>
       <Container isLoading={isLoading}>
-        <Header title="Tambah Barang Masuk" />
-        <BackNavigation LinkKembali="/master-barang/barang-masuk" />
-        <FormBarangMasuk
+        <Header title="Tambah Barang Keluar" />
+        <BackNavigation LinkKembali="/master-barang/barang-keluar" />
+        <FormBarangKeluar
           tanggal={tanggal}
           setTanggal={setTanggal}
           namaBarang={namaBarang}
