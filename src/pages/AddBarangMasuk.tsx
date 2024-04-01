@@ -9,6 +9,7 @@ export default function AddBarangMasuk() {
   const [namaBarang, setNamaBarang] = React.useState("");
   const [jumlahBarang, setJumlahBarang] = React.useState<number>(0);
   const [keterangan, setKeterangan] = React.useState("");
+  const [tanggal, setTanggal] = React.useState("");
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -20,6 +21,7 @@ export default function AddBarangMasuk() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Data yang akan dikirim: ", {
+      tanggal,
       namaBarang,
       jumlahBarang,
       keterangan,
@@ -31,6 +33,8 @@ export default function AddBarangMasuk() {
         <Header title="Tambah Barang Masuk" />
         <BackNavigation LinkKembali="/master-barang/barang-masuk" />
         <FormBarangMasuk
+          tanggal={tanggal}
+          setTanggal={setTanggal}
           namaBarang={namaBarang}
           setNamaBarang={setNamaBarang}
           jumlahBarang={jumlahBarang}

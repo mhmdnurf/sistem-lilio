@@ -8,13 +8,9 @@ interface FormBarangMasuk {
   keterangan: string;
   setKeterangan: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  tanggal: string;
-  setTanggal: (value: string) => void;
 }
 
 export default function FormBarangMasuk({
-  tanggal,
-  setTanggal,
   namaBarang,
   setNamaBarang,
   jumlahBarang,
@@ -36,21 +32,6 @@ export default function FormBarangMasuk({
         className="m-8 bg-white p-8 rounded-xl shadow drop-shadow-sm border-4"
         onSubmit={onSubmit}
       >
-        <div className="mb-2">
-          <label
-            htmlFor="stok"
-            className="text-xl text-slate-700 font-semibold"
-          >
-            Tanggal Masuk Barang
-          </label>
-          <input
-            type="date"
-            className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
-            id="tanggal"
-            value={tanggal}
-            onChange={(e) => setTanggal(e.target.value)}
-          />
-        </div>
         <div className="mb-2">
           <label
             htmlFor="Nama Barang"
@@ -102,7 +83,7 @@ export default function FormBarangMasuk({
             htmlFor="stok"
             className="text-xl text-slate-700 font-semibold"
           >
-            Jumlah Barang Masuk
+            Jumlah Barang Keluar
           </label>
           <input
             type="number"
@@ -110,6 +91,7 @@ export default function FormBarangMasuk({
             id="jumlahBarang"
             value={jumlahBarang}
             onChange={(e) => setJumlahBarang(Number(e.target.value))}
+            placeholder="Jumlah Barang Keluar"
           />
         </div>
         <div className="mb-2">
