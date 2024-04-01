@@ -10,6 +10,8 @@ import Laporan from "./pages/laporan/Laporan";
 import Login from "./pages/Login";
 import MasterBahan from "./pages/bahan/MasterBahan";
 import MasterBarang from "./pages/barang/MasterBarang";
+import AddBahanMasuk from "./pages/bahan/AddBahanMasuk";
+import AddMasterBahan from "./pages/bahan/AddMasterBahan";
 
 const routes = [
   {
@@ -49,10 +51,17 @@ const routes = [
     element: <MasterBahan />,
   },
   {
+    path: "/master-bahan/tambah",
+    element: <AddMasterBahan />,
+  },
+  {
     path: "/master-bahan/bahan-masuk",
     element: <BahanMasuk />,
   },
-
+  {
+    path: "/master-bahan/bahan-masuk/tambah",
+    element: <AddBahanMasuk />,
+  },
   {
     path: "/master-bahan/bahan-keluar",
     element: <BahanKeluar />,
