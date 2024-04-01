@@ -7,17 +7,17 @@ import { Link } from "react-router-dom";
 interface Item {
   id: number;
   tanggal: string;
-  namaBarang: string;
-  jumlahBarang: number;
-  satuan: number;
+  namaBahan: string;
+  jumlahBahan: number;
+  satuan: string;
   keterangan?: string;
 }
 
-interface TabelMasterBarang {
+interface TabelMasterBahan {
   currentItems: Item[];
 }
 
-export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
+export default function TabelMasterBahan({ currentItems }: TabelMasterBahan) {
   return (
     <>
       <div className="h-80 overflow-auto mx-8 shadow-md  border-x-4 border-t-4 border-gray-200 rounded-t-xl drop-shadow-sm">
@@ -26,7 +26,7 @@ export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
             <tr>
               <th className="px-6 py-3 font-medium">No.</th>
               <th className="px-6 py-3 font-medium">Tanggal</th>
-              <th className="px-6 py-3 font-medium">NAMA BARANG</th>
+              <th className="px-6 py-3 font-medium">NAMA BAHAN</th>
               <th className="px-6 py-3 font-medium">JUMLAH</th>
               <th className="px-6 py-3 font-medium">SATUAN</th>
               <th className="px-6 py-3 font-medium">KETERANGAN</th>
@@ -38,8 +38,8 @@ export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
               <tr key={item.id} className="border-b">
                 <td className="px-6 py-3">{item.id}</td>
                 <td className="px-6 py-3">{item.tanggal}</td>
-                <td className="px-6 py-3">{item.namaBarang}</td>
-                <td className="px-6 py-3">{item.jumlahBarang}</td>
+                <td className="px-6 py-3">{item.namaBahan}</td>
+                <td className="px-6 py-3">{item.jumlahBahan}</td>
                 <td className="px-6 py-3">{item.satuan}</td>
                 <td className="px-6 py-3">{item.keterangan}</td>
                 <td className="px-6 py-3 flex">
