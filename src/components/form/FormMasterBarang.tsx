@@ -8,6 +8,7 @@ interface FormMasterBarang {
   satuan: string;
   setSatuan: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
 }
 
 export default function FormMasterBarang({
@@ -20,6 +21,7 @@ export default function FormMasterBarang({
   satuan,
   setSatuan,
   onSubmit,
+  isLoading,
 }: FormMasterBarang) {
   return (
     <>
@@ -101,7 +103,8 @@ export default function FormMasterBarang({
           type="submit"
           className="text-lg mt-2 w-full text-center bg-gray-400 p-2 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-4 focus:ring-gray-300 focus:border-transparent"
         >
-          Simpan
+          {" "}
+          {isLoading ? "Loading..." : "Simpan"}
         </button>
       </form>
     </>

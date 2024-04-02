@@ -1,8 +1,13 @@
 import Select from "react-select";
 
-interface FormBarangMasuk {
+interface Item {
+  _id: string;
   namaBarang: string;
-  setNamaBarang: (value: string) => void;
+}
+
+interface FormBarangMasuk {
+  namaBarang: { value: string; label: string };
+  setNamaBarang: (value: { value: string; label: string }) => void;
   jumlahBarang: number;
   setJumlahBarang: (value: number) => void;
   keterangan: string;
@@ -10,6 +15,8 @@ interface FormBarangMasuk {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   tanggal: string;
   setTanggal: (value: string) => void;
+  data: Item[];
+  isLoading: boolean;
 }
 
 export default function FormBarangMasuk({
@@ -22,14 +29,13 @@ export default function FormBarangMasuk({
   keterangan,
   setKeterangan,
   onSubmit,
+  isLoading,
+  data,
 }: FormBarangMasuk) {
-  const options = [
-    { value: "Beras", label: "Beras" },
-    { value: "Gula", label: "Gula" },
-    { value: "Minyak Goreng", label: "Minyak Goreng" },
-    { value: "Telur", label: "Telur" },
-    { value: "Daging Ayam", label: "Daging Ayam" },
-  ];
+  const options = data.map((item: Item) => ({
+    value: item._id,
+    label: item.namaBarang,
+  }));
   return (
     <>
       <form
@@ -90,8 +96,10 @@ export default function FormBarangMasuk({
               }),
             }}
             id="namaBarang"
-            value={options.find((option) => option.value === namaBarang)}
-            onChange={(option) => setNamaBarang(option ? option.value : "")}
+            value={options.find((option) => option.value === namaBarang?.value)}
+            onChange={(option) =>
+              setNamaBarang(option as { value: string; label: string })
+            }
             options={options}
             isSearchable={true}
             placeholder="Pilih Nama Barang"
@@ -105,7 +113,7 @@ export default function FormBarangMasuk({
             Jumlah Barang Masuk
           </label>
           <input
-            type="number"
+            type="text"
             className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
             id="jumlahBarang"
             value={jumlahBarang}
@@ -132,7 +140,7 @@ export default function FormBarangMasuk({
           type="submit"
           className="text-lg mt-2 w-full text-center bg-gray-400 p-2 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-4 focus:ring-gray-300 focus:border-transparent"
         >
-          Simpan
+          {isLoading ? "Loading..." : "Simpan"}
         </button>
       </form>
     </>

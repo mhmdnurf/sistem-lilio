@@ -5,124 +5,33 @@ import TabelMasterBarang from "../../components/table/TabelMasterBarang";
 import Pagination from "../../components/Pagination";
 import TopTable from "../../components/TopTable";
 import MasterNavigation from "../../components/MasterNavigation";
+import Swal from "sweetalert2";
 
 export default function MasterBarang() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const [itemsPerPage] = React.useState(5);
+  const [data, setData] = React.useState([]);
+
+  const fetchMasterBarang = React.useCallback(async () => {
+    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:3000/api/master-barang");
+      const data = await response.json();
+      setData(data.data);
+      console.log("Data yang didapat: ", data);
+    } catch (error) {
+      console.error("Gagal mendapatkan data: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, []);
-  const data = [
-    {
-      id: 1,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 1",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 2,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 2",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 3,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 3",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 4,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 4",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 5,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 5",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 6,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 6",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 7,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 7",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 8,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 8",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 9,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 9",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 10,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 10",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 11,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 11",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 12,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 12",
-      jumlahBarang: 100,
-      satuan: 50,
-      keterangan: "-",
-    },
-    {
-      id: 13,
-      tanggal: "19-03-2024",
-      namaBarang: "Product 13",
-      jumlahBarang: 100,
-      satuan: 50,
-    },
-  ];
+    fetchMasterBarang();
+  }, [fetchMasterBarang]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -131,6 +40,39 @@ export default function MasterBarang() {
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Apakah Anda Yakin?",
+      text: "Data akan hilang permanen ketika dihapus",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#71717a",
+      cancelButtonColor: "#94a3b8",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Lanjutkan",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `http://localhost:3000/api/master-barang/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const data = await response.json();
+        console.log("Data yang didapat: ", data);
+        fetchMasterBarang();
+      } catch (error) {
+        console.error("Gagal menghapus data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   return (
     <>
       <Container isLoading={isLoading}>
@@ -146,7 +88,10 @@ export default function MasterBarang() {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <TabelMasterBarang currentItems={currentItems} />
+        <TabelMasterBarang
+          currentItems={currentItems}
+          handleDelete={handleDelete}
+        />
         <Pagination
           pageNumbers={pageNumbers}
           currentPage={currentPage}

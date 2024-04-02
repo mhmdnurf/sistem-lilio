@@ -5,8 +5,8 @@ import {
 import { Link } from "react-router-dom";
 
 interface Item {
-  id: number;
-  tanggal: string;
+  _id: string;
+  createdAt: string;
   namaBarang: string;
   jumlahBarang: number;
   satuan: number;
@@ -15,9 +15,13 @@ interface Item {
 
 interface TabelMasterBarang {
   currentItems: Item[];
+  handleDelete: (id: string) => void;
 }
 
-export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
+export default function TabelMasterBarang({
+  currentItems,
+  handleDelete,
+}: TabelMasterBarang) {
   return (
     <>
       <div className="h-80 overflow-auto mx-8 shadow-md  border-x-4 border-t-4 border-gray-200 rounded-t-xl drop-shadow-sm">
@@ -34,17 +38,23 @@ export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((item) => (
-              <tr key={item.id} className="border-b">
-                <td className="px-6 py-3">{item.id}</td>
-                <td className="px-6 py-3">{item.tanggal}</td>
+            {currentItems.map((item, index) => (
+              <tr key={item._id} className="border-b">
+                <td className="px-6 py-3">{index + 1}</td>
+                <td className="px-6 py-3">
+                  {("0" + new Date(item.createdAt).getDate()).slice(-2)}-
+                  {("0" + (new Date(item.createdAt).getMonth() + 1)).slice(-2)}-
+                  {new Date(item.createdAt).getFullYear()}
+                </td>
                 <td className="px-6 py-3">{item.namaBarang}</td>
                 <td className="px-6 py-3">{item.jumlahBarang}</td>
                 <td className="px-6 py-3">{item.satuan}</td>
-                <td className="px-6 py-3">{item.keterangan}</td>
+                <td className="px-6 py-3">
+                  {item.keterangan === "" ? "-" : item.keterangan}
+                </td>
                 <td className="px-6 py-3 flex">
                   <Link
-                    to={`/master-barang/edit/${item.id}`}
+                    to={`/master-barang/edit/${item._id}`}
                     className="p-2 bg-amber-300 rounded-lg hover:transform hover:scale-105"
                   >
                     <MdOutlineModeEditOutline
@@ -52,12 +62,12 @@ export default function TabelMasterBarang({ currentItems }: TabelMasterBarang) {
                       size={24}
                     />
                   </Link>
-                  <Link
-                    to={`/master-barang/delete/${item.id}`}
+                  <button
+                    onClick={() => handleDelete(item._id)}
                     className="p-2 bg-red-500 ml-2 rounded-lg hover:transform hover:scale-105"
                   >
                     <MdOutlineDeleteOutline className="text-white" size={24} />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}

@@ -5,51 +5,32 @@ import BackNavigation from "../../components/BackNavigation";
 import TopTable from "../../components/TopTable";
 import TabelBarangMasuk from "../../components/table/TabelBarangMasuk";
 import Pagination from "../../components/Pagination";
+import Swal from "sweetalert2";
 
 export default function BarangMasuk() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const [itemsPerPage] = React.useState(5);
+  const [data, setData] = React.useState([]);
 
-  const data = [
-    {
-      id: 1,
-      tanggalMasuk: "19-03-2024",
-      namaBarang: "Product 1",
-      jumlah: 100,
-    },
-    {
-      id: 2,
-      tanggalMasuk: "19-03-2024",
-      namaBarang: "Product 2",
-      jumlah: 100,
-    },
-    {
-      id: 3,
-      tanggalMasuk: "19-03-2024",
-      namaBarang: "Product 3",
-      jumlah: 100,
-    },
-    {
-      id: 4,
-      tanggalMasuk: "19-03-2024",
-      namaBarang: "Product 4",
-      jumlah: 100,
-    },
-    {
-      id: 5,
-      tanggalMasuk: "19-03-2024",
-      namaBarang: "Product 5",
-      jumlah: 100,
-    },
-  ];
-  React.useEffect(() => {
+  const fetchBarangMasuk = React.useCallback(async () => {
     setIsLoading(true);
-    setTimeout(() => {
+    try {
+      const response = await fetch("http://localhost:3000/api/barang-masuk");
+      const data = await response.json();
+      setData(data.data);
+      console.log("Data yang didapat: ", data);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   }, []);
+
+  React.useEffect(() => {
+    fetchBarangMasuk();
+  }, [fetchBarangMasuk]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -58,6 +39,38 @@ export default function BarangMasuk() {
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Apakah Anda Yakin?",
+      text: "Data akan hilang permanen ketika dihapus",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#71717a",
+      cancelButtonColor: "#94a3b8",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Lanjutkan",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `http://localhost:3000/api/barang-masuk/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const data = await response.json();
+        console.log("Data yang didapat: ", data);
+        fetchBarangMasuk();
+      } catch (error) {
+        console.error("Gagal menghapus data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
   return (
     <>
       <Container isLoading={isLoading}>
@@ -69,7 +82,10 @@ export default function BarangMasuk() {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <TabelBarangMasuk currentItems={currentItems} />
+        <TabelBarangMasuk
+          currentItems={currentItems}
+          handleDelete={handleDelete}
+        />
         <Pagination
           pageNumbers={pageNumbers}
           setCurrentPage={setCurrentPage}

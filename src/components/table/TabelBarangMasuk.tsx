@@ -1,21 +1,21 @@
-import {
-  MdOutlineDeleteOutline,
-  MdOutlineModeEditOutline,
-} from "react-icons/md";
-import { Link } from "react-router-dom";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 interface Item {
-  id: number;
-  tanggalMasuk: string;
+  _id: string;
+  tanggal: string;
   namaBarang: string;
-  jumlah: number;
+  jumlahBarang: number;
 }
 
 interface TabelBarangMasuk {
   currentItems: Item[];
+  handleDelete: (id: string) => void;
 }
 
-export default function TabelBarangMasuk({ currentItems }: TabelBarangMasuk) {
+export default function TabelBarangMasuk({
+  currentItems,
+  handleDelete,
+}: TabelBarangMasuk) {
   return (
     <>
       <div className="h-80 overflow-auto mx-8 shadow-md  border-x-4 border-t-4 border-gray-200 rounded-t-xl drop-shadow-sm">
@@ -31,27 +31,22 @@ export default function TabelBarangMasuk({ currentItems }: TabelBarangMasuk) {
           </thead>
           <tbody>
             {currentItems.map((item, index) => (
-              <tr key={item.id} className="border-b">
+              <tr key={item._id} className="border-b">
                 <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.tanggalMasuk}</td>
+                <td className="px-6 py-3">
+                  {("0" + new Date(item.tanggal).getDate()).slice(-2)}-
+                  {("0" + (new Date(item.tanggal).getMonth() + 1)).slice(-2)}-
+                  {new Date(item.tanggal).getFullYear()}
+                </td>
                 <td className="px-6 py-3">{item.namaBarang}</td>
-                <td className="px-6 py-3">{item.jumlah}</td>
+                <td className="px-6 py-3">{item.jumlahBarang}</td>
                 <td className="px-6 py-3 flex">
-                  <Link
-                    to={`/master-barang/edit/${item.id}`}
-                    className="p-2 bg-amber-300 rounded-lg hover:transform hover:scale-105"
-                  >
-                    <MdOutlineModeEditOutline
-                      className="text-white"
-                      size={24}
-                    />
-                  </Link>
-                  <Link
-                    to={`/master-barang/delete/${item.id}`}
+                  <button
+                    onClick={() => handleDelete(item._id)}
                     className="p-2 bg-red-500 ml-2 rounded-lg hover:transform hover:scale-105"
                   >
                     <MdOutlineDeleteOutline className="text-white" size={24} />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
