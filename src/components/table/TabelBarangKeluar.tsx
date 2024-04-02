@@ -33,7 +33,11 @@ export default function TabelBarangKeluar({
             {currentItems.map((item, index) => (
               <tr key={item._id} className="border-b">
                 <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.tanggal}</td>
+                <td className="px-6 py-3">
+                  {("0" + new Date(item.tanggal).getDate()).slice(-2)}-
+                  {("0" + (new Date(item.tanggal).getMonth() + 1)).slice(-2)}-
+                  {new Date(item.tanggal).getFullYear()}
+                </td>
                 <td className="px-6 py-3">{item.namaBarang}</td>
                 <td className="px-6 py-3">{item.jumlahBarang}</td>
                 <td className="px-6 py-3 flex">

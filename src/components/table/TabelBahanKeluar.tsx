@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 interface Item {
   id: number;
-  tanggalKeluar: string;
+  tanggal: string;
   namaBahan: string;
   jumlahBahan: number;
 }
@@ -33,7 +33,11 @@ export default function TabelBahanKeluar({ currentItems }: TabelBahanKeluar) {
             {currentItems.map((item, index) => (
               <tr key={item.id} className="border-b">
                 <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.tanggalKeluar}</td>
+                <td className="px-6 py-3">
+                  {("0" + new Date(item.tanggal).getDate()).slice(-2)}-
+                  {("0" + (new Date(item.tanggal).getMonth() + 1)).slice(-2)}-
+                  {new Date(item.tanggal).getFullYear()}
+                </td>
                 <td className="px-6 py-3">{item.namaBahan}</td>
                 <td className="px-6 py-3">{item.jumlahBahan}</td>
                 <td className="px-6 py-3 flex">
