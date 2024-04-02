@@ -1,11 +1,7 @@
-import {
-  MdOutlineDeleteOutline,
-  MdOutlineModeEditOutline,
-} from "react-icons/md";
-import { Link } from "react-router-dom";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 interface Item {
-  id: number;
+  _id: string;
   tanggal: string;
   namaBarang: string;
   jumlahBarang: number;
@@ -13,9 +9,13 @@ interface Item {
 
 interface TabelBarangKeluar {
   currentItems: Item[];
+  handleDelete: (id: string) => void;
 }
 
-export default function TabelBarangKeluar({ currentItems }: TabelBarangKeluar) {
+export default function TabelBarangKeluar({
+  currentItems,
+  handleDelete,
+}: TabelBarangKeluar) {
   return (
     <>
       <div className="h-80 overflow-auto mx-8 shadow-md  border-x-4 border-t-4 border-gray-200 rounded-t-xl drop-shadow-sm">
@@ -31,27 +31,18 @@ export default function TabelBarangKeluar({ currentItems }: TabelBarangKeluar) {
           </thead>
           <tbody>
             {currentItems.map((item, index) => (
-              <tr key={item.id} className="border-b">
+              <tr key={item._id} className="border-b">
                 <td className="px-6 py-3">{index + 1}</td>
                 <td className="px-6 py-3">{item.tanggal}</td>
                 <td className="px-6 py-3">{item.namaBarang}</td>
                 <td className="px-6 py-3">{item.jumlahBarang}</td>
                 <td className="px-6 py-3 flex">
-                  <Link
-                    to={`/master-barang/edit/${item.id}`}
-                    className="p-2 bg-amber-300 rounded-lg hover:transform hover:scale-105"
-                  >
-                    <MdOutlineModeEditOutline
-                      className="text-white"
-                      size={24}
-                    />
-                  </Link>
-                  <Link
-                    to={`/master-barang/delete/${item.id}`}
+                  <button
+                    onClick={() => handleDelete(item._id)}
                     className="p-2 bg-red-500 ml-2 rounded-lg hover:transform hover:scale-105"
                   >
                     <MdOutlineDeleteOutline className="text-white" size={24} />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
