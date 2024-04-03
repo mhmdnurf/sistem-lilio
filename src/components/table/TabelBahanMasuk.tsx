@@ -1,14 +1,12 @@
-import {
-  MdOutlineDeleteOutline,
-  MdOutlineModeEditOutline,
-} from "react-icons/md";
-import { Link } from "react-router-dom";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 interface Item {
   _id: string;
   tanggal: string;
   namaBahan: string;
   jumlahBahan: number;
+  satuan: string;
+  keterangan: string;
 }
 
 interface TabelBahanMasuk {
@@ -30,6 +28,8 @@ export default function TabelBahanMasuk({
               <th className="px-6 py-3 font-medium">TANGGAL MASUK</th>
               <th className="px-6 py-3 font-medium">NAMA BARANG</th>
               <th className="px-6 py-3 font-medium">JUMLAH</th>
+              <th className="px-6 py-3 font-medium">SATUAN</th>
+              <th className="px-6 py-3 font-medium">KETERANGAN</th>
               <th className="px-6 py-3 font-medium">ACTION</th>
             </tr>
           </thead>
@@ -44,16 +44,11 @@ export default function TabelBahanMasuk({
                 </td>
                 <td className="px-6 py-3">{item.namaBahan}</td>
                 <td className="px-6 py-3">{item.jumlahBahan}</td>
+                <td className="px-6 py-3">{item.satuan}</td>
+                <td className="px-6 py-3">
+                  {item.keterangan ? item.keterangan : "-"}
+                </td>
                 <td className="px-6 py-3 flex">
-                  <Link
-                    to={`/master-barang/edit/${item._id}`}
-                    className="p-2 bg-amber-300 rounded-lg hover:transform hover:scale-105"
-                  >
-                    <MdOutlineModeEditOutline
-                      className="text-white"
-                      size={24}
-                    />
-                  </Link>
                   <button
                     onClick={() => handleDelete(item._id)}
                     className="p-2 bg-red-500 ml-2 rounded-lg hover:transform hover:scale-105"

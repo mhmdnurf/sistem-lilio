@@ -12,6 +12,8 @@ import MasterBahan from "./pages/bahan/MasterBahan";
 import MasterBarang from "./pages/barang/MasterBarang";
 import AddBahanMasuk from "./pages/bahan/AddBahanMasuk";
 import AddMasterBahan from "./pages/bahan/AddMasterBahan";
+import EditMasterBahan from "./pages/bahan/EditMasterBahan";
+import AddBahanKeluar from "./pages/bahan/AddBahanKeluar";
 
 const routes = [
   {
@@ -55,6 +57,10 @@ const routes = [
     element: <AddMasterBahan />,
   },
   {
+    path: "/master-bahan/edit/:id",
+    element: <EditMasterBahan />,
+  },
+  {
     path: "/master-bahan/bahan-masuk",
     element: <BahanMasuk />,
   },
@@ -65,6 +71,10 @@ const routes = [
   {
     path: "/master-bahan/bahan-keluar",
     element: <BahanKeluar />,
+  },
+  {
+    path: "/master-bahan/bahan-keluar/tambah",
+    element: <AddBahanKeluar />,
   },
   {
     path: "/laporan",

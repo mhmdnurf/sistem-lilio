@@ -49,10 +49,12 @@ export default function TabelMasterBahan({
                 <td className="px-6 py-3">{item.namaBahan}</td>
                 <td className="px-6 py-3">{item.jumlahBahan}</td>
                 <td className="px-6 py-3">{item.satuan}</td>
-                <td className="px-6 py-3">{item.keterangan}</td>
+                <td className="px-6 py-3">
+                  {item.keterangan ? item.keterangan : "-"}
+                </td>
                 <td className="px-6 py-3 flex">
                   <Link
-                    to={`/master-barang/edit/${item._id}`}
+                    to={`/master-bahan/edit/${item._id}`}
                     className="p-2 bg-amber-300 rounded-lg hover:transform hover:scale-105"
                   >
                     <MdOutlineModeEditOutline
