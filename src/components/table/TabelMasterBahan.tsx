@@ -33,6 +33,7 @@ export default function TabelMasterBahan({
               <th className="px-6 py-3 font-medium">NAMA BAHAN</th>
               <th className="px-6 py-3 font-medium">JUMLAH</th>
               <th className="px-6 py-3 font-medium">SATUAN</th>
+              <th className="px-6 py-3 font-medium">STATUS</th>
               <th className="px-6 py-3 font-medium">KETERANGAN</th>
               <th className="px-6 py-3 font-medium">ACTION</th>
             </tr>
@@ -49,6 +50,21 @@ export default function TabelMasterBahan({
                 <td className="px-6 py-3">{item.namaBahan}</td>
                 <td className="px-6 py-3">{item.jumlahBahan}</td>
                 <td className="px-6 py-3">{item.satuan}</td>
+                <td className="px-6 py-3 text-center">
+                  {item.jumlahBahan > 1 ? (
+                    <span className="bg-green-500 p-2 w-28 rounded-md text-white font-semibold">
+                      Tersedia
+                    </span>
+                  ) : item.jumlahBahan === 1 ? (
+                    <span className="bg-yellow-500 p-2 w-28 block rounded-md text-white font-semibold">
+                      Menipis
+                    </span>
+                  ) : (
+                    <span className="bg-red-500 p-2 w-28 block rounded-md text-white font-semibold">
+                      Habis
+                    </span>
+                  )}
+                </td>
                 <td className="px-6 py-3">
                   {item.keterangan ? item.keterangan : "-"}
                 </td>

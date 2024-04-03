@@ -50,17 +50,17 @@ export default function TabelMasterBarang({
                 <td className="px-6 py-3">{item.namaBarang}</td>
                 <td className="px-6 py-3">{item.jumlahBarang}</td>
                 <td className="px-6 py-3">{item.satuan}</td>
-                <td className="px-6 py-3">
+                <td className="px-6 py-3 text-center">
                   {item.jumlahBarang > 1 ? (
-                    <span className="bg-green-500 p-2 rounded-md text-white font-semibold">
+                    <span className="bg-green-500 p-2 w-28 block rounded-md text-white font-semibold">
                       Tersedia
                     </span>
                   ) : item.jumlahBarang === 1 ? (
-                    <span className="bg-yellow-500 p-2 rounded-md text-white font-semibold">
+                    <span className="bg-yellow-500 p-2 w-28 block rounded-md text-white font-semibold">
                       Menipis
                     </span>
                   ) : (
-                    <span className="bg-red-500 p-2 rounded-md text-white font-semibold">
+                    <span className="bg-red-500 p-2 w-28 block rounded-md text-white font-semibold">
                       Habis
                     </span>
                   )}
