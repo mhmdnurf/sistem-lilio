@@ -5,70 +5,33 @@ import MasterNavigation from "../../components/MasterNavigation";
 import TopTable from "../../components/TopTable";
 import Pagination from "../../components/Pagination";
 import TabelMasterBahan from "../../components/table/TabelMasterBahan";
+import Swal from "sweetalert2";
 
 export default function MasterBahan() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const [itemsPerPage] = React.useState(5);
+  const [data, setData] = React.useState([]);
 
-  const data = [
-    {
-      id: 1,
-      tanggal: "12-12-2021",
-      namaBahan: "Beras",
-      jumlahBahan: 10,
-      satuan: "Kg",
-      keterangan: "Beras putih",
-    },
-    {
-      id: 2,
-      tanggal: "12-12-2021",
-      namaBahan: "Gula",
-      jumlahBahan: 10,
-      satuan: "Kg",
-      keterangan: "Gula pasir",
-    },
-    {
-      id: 3,
-      tanggal: "12-12-2021",
-      namaBahan: "Minyak",
-      jumlahBahan: 10,
-      satuan: "L",
-      keterangan: "Minyak goreng",
-    },
-    {
-      id: 4,
-      tanggal: "12-12-2021",
-      namaBahan: "Garam",
-      jumlahBahan: 10,
-      satuan: "Kg",
-      keterangan: "Garam halus",
-    },
-    {
-      id: 5,
-      tanggal: "12-12-2021",
-      namaBahan: "Merica",
-      jumlahBahan: 10,
-      satuan: "Kg",
-      keterangan: "Merica hitam",
-    },
-    {
-      id: 6,
-      tanggal: "12-12-2021",
-      namaBahan: "Kecap",
-      jumlahBahan: 10,
-      satuan: "L",
-      keterangan: "Kecap manis",
-    },
-  ];
+  const fetchMasterBahan = React.useCallback(async () => {
+    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:3000/api/master-bahan");
+      const data = await response.json();
+      setData(data.data);
+      console.log("Data yang didapat: ", data);
+    } catch (error) {
+      console.error("Gagal mendapatkan data: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, []);
+    fetchMasterBahan();
+  }, [fetchMasterBahan]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -77,6 +40,38 @@ export default function MasterBahan() {
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Apakah Anda Yakin?",
+      text: "Data akan hilang permanen ketika dihapus",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#71717a",
+      cancelButtonColor: "#94a3b8",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Lanjutkan",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `http://localhost:3000/api/master-bahan/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const data = await response.json();
+        console.log("Data yang didapat: ", data);
+        fetchMasterBahan();
+      } catch (error) {
+        console.error("Gagal menghapus data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
   return (
     <>
       <Container isLoading={isLoading}>
@@ -92,7 +87,10 @@ export default function MasterBahan() {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <TabelMasterBahan currentItems={currentItems} />
+        <TabelMasterBahan
+          currentItems={currentItems}
+          handleDelete={handleDelete}
+        />
         <Pagination
           pageNumbers={pageNumbers}
           currentPage={currentPage}

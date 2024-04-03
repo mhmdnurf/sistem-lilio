@@ -3,8 +3,11 @@ import Container from "../../components/Container";
 import Header from "../../components/Header";
 import BackNavigation from "../../components/BackNavigation";
 import FormMasterBahan from "../../components/form/FormMasterBahan";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMasterBahan() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
   const [namaBahan, setNamaBahan] = React.useState("");
   const [jumlahBahan, setJumlahBahan] = React.useState<number>(0);
@@ -18,14 +21,48 @@ export default function AddMasterBahan() {
     }, 500);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     e.preventDefault();
-    console.log("Data yang akan dikirim: ", {
+    const data = {
       namaBahan,
-      satuan,
       jumlahBahan,
       keterangan,
-    });
+      satuan,
+    };
+    console.log(data);
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/master-bahan/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        Swal.fire({
+          title: "Nama bahan sudah digunakan!",
+          text: "Silahkan gunakan nama bahan yang lain",
+          icon: "error",
+          confirmButtonColor: "#71717a",
+          confirmButtonText: "OK",
+        });
+        throw new Error("Something went wrong");
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+      navigate("/master-bahan");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <>

@@ -1,15 +1,22 @@
 import Select from "react-select";
 
 interface FormBahanMasuk {
-  namaBahan: string;
-  setNamaBahan: (value: string) => void;
+  namaBahan: { value: string; label: string };
+  setNamaBahan: (value: { value: string; label: string }) => void;
   jumlahBahan: number;
-  setJumlahBarang: (value: number) => void;
+  setJumlahBahan: (value: number) => void;
   keterangan: string;
   setKeterangan: (value: string) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   tanggal: string;
   setTanggal: (value: string) => void;
+  data: Item[];
+  isLoading: boolean;
+}
+
+interface Item {
+  _id: string;
+  namaBahan: string;
 }
 
 export default function FormBahanMasuk({
@@ -18,18 +25,16 @@ export default function FormBahanMasuk({
   namaBahan,
   setNamaBahan,
   jumlahBahan,
-  setJumlahBarang,
+  setJumlahBahan,
   keterangan,
   setKeterangan,
   onSubmit,
+  data,
 }: FormBahanMasuk) {
-  const options = [
-    { value: "Beras", label: "Beras" },
-    { value: "Gula", label: "Gula" },
-    { value: "Minyak Goreng", label: "Minyak Goreng" },
-    { value: "Telur", label: "Telur" },
-    { value: "Daging Ayam", label: "Daging Ayam" },
-  ];
+  const options = data.map((item: Item) => ({
+    value: item._id,
+    label: item.namaBahan,
+  }));
   return (
     <>
       <form
@@ -90,8 +95,10 @@ export default function FormBahanMasuk({
               }),
             }}
             id="namaBahan"
-            value={options.find((option) => option.value === namaBahan)}
-            onChange={(option) => setNamaBahan(option ? option.value : "")}
+            value={options.find((option) => option.value === namaBahan?.value)}
+            onChange={(option) =>
+              setNamaBahan(option as { value: string; label: string })
+            }
             options={options}
             isSearchable={true}
             placeholder="Pilih Nama Bahan"
@@ -109,7 +116,7 @@ export default function FormBahanMasuk({
             className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
             id="jumlahBahan"
             value={jumlahBahan}
-            onChange={(e) => setJumlahBarang(Number(e.target.value))}
+            onChange={(e) => setJumlahBahan(Number(e.target.value))}
           />
         </div>
         <div className="mb-2">
