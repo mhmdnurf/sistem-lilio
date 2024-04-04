@@ -22,7 +22,7 @@ export default function LatestProducts() {
   }, [fetchLatestBahan]);
   return (
     <>
-      <div className="m-8 bg-white rounded-xl shadow-md">
+      <div className="my-8 mx-[20px] bg-white rounded-xl shadow-md">
         <h1 className="px-6 pt-6 mb-6 text-lg font-semibold">
           Bahan Masuk Terkini
         </h1>
