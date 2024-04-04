@@ -5,7 +5,19 @@ import {
   MdArrowCircleUp,
 } from "react-icons/md";
 
-export default function CardList() {
+interface CardList {
+  statistikBarang: number;
+  statistikBahan: number;
+  statistikBahanMasuk: number;
+  statistikBahanKeluar: number;
+}
+
+export default function CardList({
+  statistikBarang,
+  statistikBahan,
+  statistikBahanMasuk,
+  statistikBahanKeluar,
+}: CardList) {
   return (
     <>
       <h1 className="text-2xl ml-8 mt-8 font-bold text-slate-700 font-poppins">
@@ -21,10 +33,13 @@ export default function CardList() {
           </div>
           <div className="mx-4 -mt-8 mb-7">
             <p className="text-4xl font-semibold font-poppins text-slate-800">
-              100
+              {statistikBarang}
             </p>
             <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
-              Maret 2024
+              {new Date().toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+              })}
             </p>
           </div>
         </div>
@@ -37,10 +52,13 @@ export default function CardList() {
           </div>
           <div className="mx-4 -mt-8 mb-7">
             <p className="font-poppins text-4xl font-semibold text-slate-800">
-              100
+              {statistikBahan}
             </p>
             <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
-              Maret 2024
+              {new Date().toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+              })}
             </p>
           </div>
         </div>
@@ -53,10 +71,13 @@ export default function CardList() {
           </div>
           <div className="mx-4 -mt-8 mb-7">
             <p className="text-4xl font-semibold font-poppins text-slate-800">
-              100
+              {statistikBahanMasuk}
             </p>
             <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
-              Maret 2024
+              {new Date().toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+              })}
             </p>
           </div>
         </div>
@@ -69,10 +90,13 @@ export default function CardList() {
           </div>
           <div className="mx-4 -mt-8 mb-7">
             <p className="font-poppins text-4xl text-slate-800 font-semibold">
-              100
+              {statistikBahanKeluar}
             </p>
             <p className="font-nunito text-sm font-semibold text-slate-500 mt-2">
-              Maret 2024
+              {new Date().toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+              })}
             </p>
           </div>
         </div>

@@ -52,7 +52,7 @@ export default function TabelMasterBahan({
                 <td className="px-6 py-3">{item.satuan}</td>
                 <td className="px-6 py-3 text-center">
                   {item.jumlahBahan > 1 ? (
-                    <span className="bg-green-500 p-2 w-28 rounded-md text-white font-semibold">
+                    <span className="bg-green-500 p-2 w-28 block rounded-md text-white font-semibold">
                       Tersedia
                     </span>
                   ) : item.jumlahBahan === 1 ? (
