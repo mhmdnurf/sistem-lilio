@@ -8,11 +8,11 @@ interface Container {
 
 export default function Container({ children, isLoading }: Container) {
   return (
-    <div className="flex h-[100vh] bg-slate-50">
+    <div className="flex h-screen bg-slate-50">
       <div className="w-[250px] h-full sticky top-0">
         <Sidebar />
       </div>
-      <div className="flex-grow overflow-auto">
+      <div className="flex-grow overflow-auto h-full">
         {isLoading ? <Loader /> : children}
       </div>
     </div>

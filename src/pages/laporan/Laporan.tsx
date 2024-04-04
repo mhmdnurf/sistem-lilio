@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../components/Container";
 import Header from "../../components/Header";
+import LaporanButton from "../../components/LaporanButton";
 
 export default function Laporan() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -8,12 +9,13 @@ export default function Laporan() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 100);
   }, []);
   return (
     <>
       <Container isLoading={isLoading}>
         <Header title="Laporan" />
+        <LaporanButton />
       </Container>
     </>
   );
