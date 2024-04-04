@@ -6,7 +6,7 @@ import {
   MdAssignment,
   MdExitToApp,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -24,43 +24,59 @@ export default function Sidebar() {
       <nav className="mt-8">
         <ul>
           <li className="">
-            <Link
+            <NavLink
               to={"/"}
-              className="flex items-center p-4 hover:transform hover:scale-110 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center p-4 backdrop-opacity-15 hover:transform hover:scale-110 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+                  : "flex items-center p-4  hover:transform hover:scale-110  bg-opacity-5 rounded-lg mx-4 my-4"
+              }
             >
               <MdHome className="text-white text-2xl mr-4" />
               <p className="text-white font-semibold">Dashboard</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to={"/master-barang"}
-              className="flex items-center p-4 backdrop-opacity-15 hover:transform hover:scale-110 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center p-4 backdrop-opacity-15 hover:transform hover:scale-110 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+                  : "flex items-center p-4  hover:transform hover:scale-110  bg-opacity-5 rounded-lg mx-4 my-4"
+              }
             >
               <MdMedicalInformation className="text-white text-2xl mr-4" />
               <p className="text-white font-semibold">Master Barang</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to={"/master-bahan"}
-              className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4 hover:transform hover:scale-110"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center p-4 backdrop-opacity-15 hover:transform hover:scale-110 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+                  : "flex items-center p-4  hover:transform hover:scale-110  bg-opacity-5 rounded-lg mx-4 my-4"
+              }
             >
               <MdFastfood className="text-white text-2xl mr-4" />
               <p className="text-white font-semibold">Master Bahan</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to={"/laporan"}
-              className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4 hover:transform hover:scale-110"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center p-4 backdrop-opacity-15 hover:transform hover:scale-110 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4"
+                  : "flex items-center p-4  hover:transform hover:scale-110  bg-opacity-5 rounded-lg mx-4 my-4"
+              }
             >
               <MdAssignment className="text-white text-2xl mr-4" />
               <p className="text-white font-semibold">Laporan</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <div className="flex items-center p-4 backdrop-opacity-15 shadow drop-shadow bg-white bg-opacity-5 rounded-lg mx-4 my-4 hover:transform hover:scale-110">
+            <div className="flex items-center p-4 rounded-lg mx-4 my-4 hover:transform hover:scale-110">
               <MdExitToApp className="text-white text-2xl mr-4" />
               <a href="#" className="text-white font-semibold">
                 Logout
