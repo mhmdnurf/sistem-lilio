@@ -49,6 +49,30 @@ export default function AddBahanKeluar() {
       jumlahBahan,
       keterangan,
     };
+
+    if (data.jumlahBahan < 1) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Jumlah bahan tidak boleh kosong!",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (!data.bahan_id || !data.tanggal || !data.jumlahBahan) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Harap isi semua bidang kecuali keterangan",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
     console.log(data);
 
     try {
@@ -88,6 +112,13 @@ export default function AddBahanKeluar() {
 
       const responseData = await response.json();
       console.log(responseData);
+      Swal.fire({
+        title: "Data berhasil ditambahkan!",
+        text: "Pengeluaran bahan berhasil dilakukan!",
+        icon: "success",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
     } catch (error) {
       console.error(error);
     } finally {

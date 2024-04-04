@@ -51,7 +51,7 @@ export default function FormMasterBahan({
             Stok (Jumlah Awal)
           </label>
           <input
-            type="number"
+            type="text"
             className="w-full p-2 rounded-lg border-4 border-gray-100 mt-2 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all"
             id="jumlahBahan"
             value={jumlahBahan}

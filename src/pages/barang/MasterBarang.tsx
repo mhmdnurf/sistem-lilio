@@ -44,7 +44,7 @@ export default function MasterBarang() {
   const handleDelete = async (id: string) => {
     const result = await Swal.fire({
       title: "Apakah Anda Yakin?",
-      text: "Data akan hilang permanen ketika dihapus",
+      text: "Data akan hilang permanen ketika dihapus dan data yang terikat juga akan ikut hilang",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#71717a",

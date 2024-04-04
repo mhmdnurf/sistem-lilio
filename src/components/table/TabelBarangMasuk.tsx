@@ -5,6 +5,8 @@ interface Item {
   tanggal: string;
   namaBarang: string;
   jumlahBarang: number;
+  satuan: string;
+  keterangan: string;
 }
 
 interface TabelBarangMasuk {
@@ -26,6 +28,8 @@ export default function TabelBarangMasuk({
               <th className="px-6 py-3 font-medium">TANGGAL MASUK</th>
               <th className="px-6 py-3 font-medium">NAMA BARANG</th>
               <th className="px-6 py-3 font-medium">JUMLAH</th>
+              <th className="px-6 py-3 font-medium">SATUAN</th>
+              <th className="px-6 py-3 font-medium">KETERANGAN</th>
               <th className="px-6 py-3 font-medium">ACTION</th>
             </tr>
           </thead>
@@ -40,6 +44,10 @@ export default function TabelBarangMasuk({
                 </td>
                 <td className="px-6 py-3">{item.namaBarang}</td>
                 <td className="px-6 py-3">{item.jumlahBarang}</td>
+                <td className="px-6 py-3">{item.satuan}</td>
+                <td className="px-6 py-3">
+                  {item.keterangan ? item.keterangan : "-"}
+                </td>
                 <td className="px-6 py-3 flex">
                   <button
                     onClick={() => handleDelete(item._id)}

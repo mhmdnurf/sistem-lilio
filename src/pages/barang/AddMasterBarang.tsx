@@ -31,6 +31,31 @@ export default function AddMasterBarang() {
       keterangan,
       satuan,
     };
+
+    if (jumlahBarang < 1) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Jumlah barang tidak boleh kosong!",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (!namaBarang || !jumlahBarang || !satuan) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Harap isi semua data kecuali keterangan",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
+
     console.log(data);
 
     try {
@@ -58,6 +83,13 @@ export default function AddMasterBarang() {
 
       const responseData = await response.json();
       console.log(responseData);
+      Swal.fire({
+        title: "Data berhasil ditambahkan!",
+        text: "Penambahan data barang berhasil dilakukan!",
+        icon: "success",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
       navigate("/master-barang");
     } catch (error) {
       console.error(error);

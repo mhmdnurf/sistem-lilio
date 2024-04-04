@@ -8,7 +8,7 @@ interface Item {
 interface FormBarangMasuk {
   namaBarang: { value: string; label: string };
   setNamaBarang: (value: { value: string; label: string }) => void;
-  jumlahBarang: number;
+  jumlahBarang: number | undefined;
   setJumlahBarang: (value: number) => void;
   keterangan: string;
   setKeterangan: (value: string) => void;

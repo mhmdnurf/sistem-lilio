@@ -30,6 +30,30 @@ export default function AddMasterBahan() {
       keterangan,
       satuan,
     };
+
+    if (jumlahBahan < 1) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Jumlah bahan tidak boleh kosong!",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (!namaBahan || !jumlahBahan || !satuan) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Harap isi semua data kecuali keterangan",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
     console.log(data);
 
     try {
@@ -57,6 +81,13 @@ export default function AddMasterBahan() {
 
       const responseData = await response.json();
       console.log(responseData);
+      Swal.fire({
+        title: "Data berhasil ditambahkan!",
+        text: "Penambahan data bahan berhasil dilakukan!",
+        icon: "success",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
       navigate("/master-bahan");
     } catch (error) {
       console.error(error);
