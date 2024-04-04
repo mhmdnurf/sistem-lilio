@@ -8,7 +8,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>
 );
-
-//
-// TELEGRAM_TOKEN = 6804868661:AAFWiKmk3mZHGNQ5efhAT3K2gOTvQe1Uhw0
-// CHAT_ID = 1388646686

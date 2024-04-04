@@ -64,13 +64,25 @@ export default function AddBahanKeluar() {
       );
 
       if (!response.ok) {
-        Swal.fire({
-          title: "Something went wrong!",
-          text: "Please try again",
-          icon: "warning",
-          confirmButtonColor: "#71717a",
-          confirmButtonText: "OK",
-        });
+        if (response.status === 400) {
+          response.json().then((data) => {
+            Swal.fire({
+              title: "Error!",
+              text: data.message,
+              icon: "error",
+              confirmButtonColor: "#71717a",
+              confirmButtonText: "OK",
+            });
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Bahan tidak ditemukan!",
+            icon: "error",
+            confirmButtonColor: "#71717a",
+            confirmButtonText: "OK",
+          });
+        }
         throw new Error("Something went wrong");
       }
 
