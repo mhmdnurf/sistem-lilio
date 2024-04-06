@@ -7,6 +7,13 @@ import Pagination from "../../components/Pagination";
 import TabelBahanKeluar from "../../components/table/TabelBahanKeluar";
 import Swal from "sweetalert2";
 
+interface Bahan {
+  namaBahan: string;
+  jumlahBahan: number;
+  satuan: string;
+  keterangan?: string;
+}
+
 export default function BahanKeluar() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
@@ -34,8 +41,15 @@ export default function BahanKeluar() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const filteredData = data.filter((item: Bahan) => {
+    return (
+      item.namaBahan.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.jumlahBahan.toString().includes(searchText.toLowerCase()) ||
+      item.satuan.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.keterangan?.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);

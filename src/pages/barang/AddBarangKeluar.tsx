@@ -122,7 +122,7 @@ export default function AddBarangKeluar() {
       console.error(error);
     } finally {
       setIsLoading(false);
-      navigate("/master-barang/barang-masuk");
+      navigate("/master-barang/barang-keluar");
     }
   };
   return (
