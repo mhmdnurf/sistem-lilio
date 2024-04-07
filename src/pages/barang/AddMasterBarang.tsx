@@ -32,6 +32,18 @@ export default function AddMasterBarang() {
       satuan,
     };
 
+    if (typeof namaBarang !== "string" || !isNaN(Number(namaBarang))) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Nama barang harus berupa string dan bukan angka!",
+        icon: "error",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
+      setIsLoading(false);
+      return;
+    }
+
     if (jumlahBarang < 1) {
       Swal.fire({
         title: "Gagal!",
