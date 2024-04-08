@@ -73,6 +73,13 @@ export default function EditMasterBarang() {
       console.error(error);
     } finally {
       setIsLoading(false);
+      Swal.fire({
+        title: "Data berhasil diubah!",
+        text: "Pengubahan barang berhasil dilakukan!",
+        icon: "success",
+        confirmButtonColor: "#71717a",
+        confirmButtonText: "OK",
+      });
     }
   };
   return (

@@ -81,7 +81,7 @@ export default function FormEditMasterBarang({
         </div>
         <button
           type="submit"
-          className="text-lg mt-2 w-full text-center bg-gray-400 p-2 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-4 focus:ring-gray-300 focus:border-transparent"
+          className="text-lg mt-2 w-full text-center bg-blue-950 p-2 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-4 focus:ring-gray-300 focus:border-transparent"
         >
           Simpan
         </button>

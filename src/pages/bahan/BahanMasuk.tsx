@@ -84,6 +84,13 @@ export default function BahanMasuk() {
         console.error("Gagal menghapus data: ", error);
       } finally {
         setIsLoading(false);
+        Swal.fire({
+          title: "Data berhasil dihapus!",
+          text: "Penghapusan bahan berhasil dilakukan!",
+          icon: "success",
+          confirmButtonColor: "#71717a",
+          confirmButtonText: "OK",
+        });
       }
     }
   };
