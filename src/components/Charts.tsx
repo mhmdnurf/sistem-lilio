@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AreaChart,
   Area,
@@ -9,50 +10,53 @@ import {
   Legend,
 } from "recharts";
 
-const productSales = [
-  {
-    name: "Jan",
-    product1: 4000,
-    product2: 2400,
-    product3: 1200,
-  },
-  {
-    name: "Feb",
-    product1: 3000,
-    product2: 2210,
-    product3: 2600,
-  },
-  {
-    name: "Mar",
-    product1: 2000,
-    product2: 2290,
-    product3: 2300,
-  },
-  {
-    name: "Apr",
-    product1: 2780,
-    product2: 2000,
-    product3: 2589,
-  },
-  {
-    name: "May",
-    product1: 1890,
-    product2: 2181,
-    product3: 1287,
-  },
-  {
-    name: "Jun",
-    product1: 2390,
-    product2: 2500,
-    product3: 3700,
-  },
-];
-
 const Charts = () => {
+  const [topBahan, setTopBahan] = React.useState([]);
+
+  const fetchTopBahan = React.useCallback(async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/top-bahan");
+      const data = await response.json();
+      setTopBahan(data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    fetchTopBahan();
+  }, [fetchTopBahan]);
+
+  const keys = React.useMemo(() => {
+    const allKeys = topBahan.reduce((keys, item) => {
+      return [...keys, ...Object.keys(item)];
+    }, [] as string[]); // Assert that the keys are strings
+
+    // Remove duplicates and exclude "month"
+    return [...new Set(allKeys)].filter((key) => key !== "month");
+  }, [topBahan]);
+  const colors = [
+    "#0ea5e9",
+    "#eab308",
+    "#22c55e",
+    "#ff4500",
+    "#2e8b57",
+    "#da70d6",
+    "#800080",
+    "#ff00ff",
+    "#bc8f8f",
+    "#4169e1",
+    "#8b4513",
+    "#fa8072",
+    "#f4a460",
+    "#2e8b57",
+    "#dda0dd",
+    "#5f9ea0",
+  ];
   return (
     <>
       <h1 className="mx-[30px] mt-10 mb-4 text-2xl font-semibold text-slate-700">
-        Charts
+        Analytics
       </h1>
       <ResponsiveContainer
         height={400}
@@ -68,11 +72,11 @@ const Charts = () => {
         <AreaChart
           width={500}
           height={400}
-          data={productSales}
+          data={topBahan}
           margin={{ right: 30, left: 30, top: 30, bottom: 30 }}
         >
           <YAxis />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="month" />
           <CartesianGrid strokeDasharray="5 5" />
 
           <Tooltip
@@ -80,27 +84,16 @@ const Charts = () => {
           />
           <Legend />
 
-          <Area
-            type="bump"
-            dataKey="product1"
-            stroke="#0ea5e9"
-            fill="#0ea5e9"
-            stackId="1"
-          />
-          <Area
-            type="bump"
-            dataKey="product2"
-            stroke="#eab308"
-            fill="#eab308"
-            stackId="1"
-          />
-          <Area
-            type="bump"
-            dataKey="product2"
-            stroke="#22c55e"
-            fill="#22c55e"
-            stackId="1"
-          />
+          {keys.map((key, index) => (
+            <Area
+              key={key}
+              type="monotone"
+              dataKey={key}
+              stroke={colors[index % colors.length]}
+              fill={colors[index % colors.length]}
+              stackId="1"
+            />
+          ))}
         </AreaChart>
       </ResponsiveContainer>
     </>
@@ -113,25 +106,40 @@ const CustomTooltip = ({
   label,
 }: {
   active: boolean;
-  payload: never[] | { value: number }[];
+  payload: never[] | { value: number; name: string }[];
   label: string;
 }) => {
+  const colors = [
+    "#0ea5e9",
+    "#eab308",
+    "#22c55e",
+    "#ff4500",
+    "#2e8b57",
+    "#da70d6",
+    "#800080",
+    "#ff00ff",
+    "#bc8f8f",
+    "#4169e1",
+    "#8b4513",
+    "#fa8072",
+    "#f4a460",
+    "#2e8b57",
+    "#dda0dd",
+    "#5f9ea0",
+  ];
   if (active && payload && payload.length) {
     return (
       <div className="p-4 bg-white flex flex-col gap-4 rounded-md">
         <p className="text-medium text-lg">{label}</p>
-        <p className="text-sm text-blue-400">
-          Product 1:
-          <span className="ml-2">${payload[0].value}</span>
-        </p>
-        <p className="text-sm text-indigo-400">
-          Product 2:
-          <span className="ml-2">${payload[1].value}</span>
-        </p>
-        <p className="text-sm text-indigo-400">
-          Product 3:
-          <span className="ml-2">${payload[1].value}</span>
-        </p>
+        {payload.map((item, index) => (
+          <p
+            key={index}
+            className="text-sm"
+            style={{ color: colors[index % colors.length] }}
+          >
+            {item.name}:<span className="ml-2">{item.value}</span>
+          </p>
+        ))}
       </div>
     );
   }
