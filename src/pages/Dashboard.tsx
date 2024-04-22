@@ -5,13 +5,24 @@ import Container from "../components/Container";
 import Greetings from "../components/Greetings";
 import Header from "../components/Header";
 import LatestProducts from "../components/LatestProducts";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
+import { app } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const auth = getAuth(app);
   const [isLoading, setIsLoading] = React.useState(false);
   const [statistikBahan, setStatistikBahan] = React.useState(0);
   const [statistikBarang, setStatistikBarang] = React.useState(0);
   const [statistikBahanMasuk, setStatistikBahanMasuk] = React.useState(0);
   const [statistikBahanKeluar, setStatistikBahanKeluar] = React.useState(0);
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  if (!user) {
+    navigate("/login");
+  }
 
   const fetchStatistikBarang = React.useCallback(async () => {
     setIsLoading(true);

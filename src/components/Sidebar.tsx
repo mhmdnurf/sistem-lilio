@@ -6,9 +6,36 @@ import {
   MdAssignment,
   MdExitToApp,
 } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { app } from "../utils/firebase";
+import Swal from "sweetalert2";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Apakah Anda Yakin?",
+        text: "Anda akan segera logout dari sistem",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#334155",
+        cancelButtonColor: "#94a3b8",
+        cancelButtonText: "Batal",
+        confirmButtonText: "Confirm",
+      });
+
+      if (result.isConfirmed) {
+        const auth = getAuth(app);
+        await signOut(auth);
+        Swal.fire("Berhasil", "Anda berhasil logout", "success");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="bg-slate-800 w-[250px] h-screen">
       <div className="h-16 p-4 justify-center items-center flex">
@@ -78,9 +105,12 @@ export default function Sidebar() {
           <li>
             <div className="flex items-center p-4 rounded-lg mx-4 my-4 hover:transform hover:scale-110">
               <MdExitToApp className="text-white text-2xl mr-4" />
-              <a href="#" className="text-white font-semibold">
+              <button
+                className="text-white font-semibold"
+                onClick={handleLogout}
+              >
                 Logout
-              </a>
+              </button>
             </div>
           </li>
         </ul>
